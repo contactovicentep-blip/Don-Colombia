@@ -68,7 +68,7 @@
   /* NAV */
   nav {
     position: fixed; top: 44px; width: 100%; z-index: 150;
-    padding: 28px 60px;
+    padding: 18px 60px;
     display: flex; justify-content: space-between; align-items: center;
     background: rgba(13,11,8,0.97);
     backdrop-filter: blur(4px);
@@ -874,7 +874,7 @@
     white-space: nowrap;
   }
   .top-bar-cta:hover { background: var(--espresso); }
-  body { padding-top: 88px; }
+  body { padding-top: 108px; }
 
   /* EXIT POPUP */
   .popup-overlay {
@@ -1074,8 +1074,8 @@
 
   /* MOBILE */
   @media (max-width: 768px) {
-    nav { padding: 20px 24px; }
-    nav.scrolled { padding: 14px 24px; }
+    nav { padding: 14px 24px; top: 44px; }
+    nav.scrolled { padding: 10px 24px; top: 44px; }
     .nav-links, .nav-cta { display: none; }
     .hero-content { padding: 0 24px; }
     .manifesto, .diferencial, .product, .sensory, .testimonials, .faq, .final-cta { padding: 80px 24px; }
