@@ -1413,18 +1413,15 @@
     <h2 class="section-title reveal">Antes que suba<br><em>el precio.</em></h2>
     <p class="email-capture-sub reveal">Únete a la lista de clientes Don Colombia. Recibirás acceso anticipado a nuevos lotes, precios especiales y contenido exclusivo de la finca. Sin spam, solo café.</p>
     <div class="reveal" style="max-width:480px;margin:0 auto 24px;">
-      <form id="sib-form" method="POST" action="https://29a55f4a.sibforms.com/serve/MUIFALiu1PUZUoXS8jLK4dfc7JlG8Ah10ByjrrBtRNOzOtZDKytC7m3DmhObo5oVxuc1AAZOPu4oVhaLbfeh8DLLrL6es0Ey2HyHK7zzEPy2hy6OUDQc-pbaJnRqcVatkhM1vG3DgWjSEmN3Yh0E3_oP-dkhEwxmwTH_ZgJ80gVRfmLHA11WbAbYAOGm7mr-6hdRiZPWkbA3ajcNDg==" style="display:flex;gap:0;">
+      <div style="display:flex;gap:0;" id="emailFormWrap">
         <input 
           type="email" 
-          id="EMAIL" 
-          name="EMAIL" 
-          autocomplete="off" 
+          id="emailCapture"
           placeholder="tu@email.com" 
-          required 
           style="
             flex:1;
             padding:16px 20px;
-            background:white;
+            background:#FFFFFF;
             border:2px solid #3D2B1F;
             border-right:none;
             font-family:'Montserrat',sans-serif;
@@ -1432,10 +1429,11 @@
             color:#1A1208;
             outline:none;
             -webkit-appearance:none;
+            box-sizing:border-box;
           " 
         />
         <button 
-          type="submit" 
+          onclick="submitBrevoEmail()"
           style="
             background:#1A1208;
             color:#C9A84C;
@@ -1450,10 +1448,13 @@
             white-space:nowrap;
           "
         >☕ Quiero acceso</button>
-        <input type="text" name="email_address_check" value="" style="display:none;">
-        <input type="hidden" name="locale" value="es">
-        <input type="hidden" name="html_type" value="simple">
-      </form>
+      </div>
+      <div id="emailSuccessMsg" style="display:none;background:rgba(28,43,26,0.08);border:1px solid rgba(28,43,26,0.2);padding:16px 24px;font-size:0.8rem;color:#3D2B1F;letter-spacing:0.05em;margin-top:8px;text-align:center;">
+        ☕ ¡Perfecto! Ya estás en la lista. Te avisamos primero.
+      </div>
+      <div id="emailErrorMsg" style="display:none;background:rgba(232,148,106,0.1);border:1px solid rgba(232,148,106,0.3);padding:12px 24px;font-size:0.75rem;color:#8B3A1A;letter-spacing:0.05em;margin-top:8px;text-align:center;">
+        Ingresa un email válido para continuar.
+      </div>
     </div>
     <p class="email-note reveal">Sin spam. Solo café. Puedes salir cuando quieras.</p>
   </div>
@@ -1653,11 +1654,54 @@
   var counterEl = document.getElementById('bolsasCount');
   if (counterEl) counterObserver.observe(counterEl);
 
-  // EMAIL TRACKING
-  document.getElementById('sib-form') && document.getElementById('sib-form').addEventListener('submit', function() {
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'email_capture', { event_category: 'lead' });
+  // EMAIL CAPTURE — Brevo iframe submit (no redirect)
+  function submitBrevoEmail() {
+    var emailEl = document.getElementById('emailCapture');
+    var email = emailEl.value.trim();
+    var successEl = document.getElementById('emailSuccessMsg');
+    var errorEl = document.getElementById('emailErrorMsg');
+    var wrapEl = document.getElementById('emailFormWrap');
+
+    errorEl.style.display = 'none';
+
+    if (!email || email.indexOf('@') < 1) {
+      errorEl.style.display = 'block';
+      emailEl.style.borderColor = '#E8946A';
+      return;
     }
+
+    // Submit via hidden iframe to avoid redirect
+    var iframe = document.createElement('iframe');
+    iframe.name = 'brevo_iframe';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://29a55f4a.sibforms.com/serve/MUIFALiu1PUZUoXS8jLK4dfc7JlG8Ah10ByjrrBtRNOzOtZDKytC7m3DmhObo5oVxuc1AAZOPu4oVhaLbfeh8DLLrL6es0Ey2HyHK7zzEPy2hy6OUDQc-pbaJnRqcVatkhM1vG3DgWjSEmN3Yh0E3_oP-dkhEwxmwTH_ZgJ80gVRfmLHA11WbAbYAOGm7mr-6hdRiZPWkbA3ajcNDg==';
+    form.target = 'brevo_iframe';
+    form.style.display = 'none';
+
+    var fields = {EMAIL: email, email_address_check: '', locale: 'es', html_type: 'simple'};
+    for (var k in fields) {
+      var inp = document.createElement('input');
+      inp.name = k; inp.value = fields[k];
+      form.appendChild(inp);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+
+    wrapEl.style.display = 'none';
+    successEl.style.display = 'block';
+
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'email_capture', {event_category: 'lead', event_label: email});
+    }
+  }
+
+  document.getElementById('emailCapture') && document.getElementById('emailCapture').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') submitBrevoEmail();
   });
 </script>
 </body>
