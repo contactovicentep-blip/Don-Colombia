@@ -67,17 +67,19 @@
 
   /* NAV */
   nav {
-    position: fixed; top: 0; width: 100%; z-index: 100;
+    position: fixed; top: 44px; width: 100%; z-index: 150;
     padding: 28px 60px;
     display: flex; justify-content: space-between; align-items: center;
-    background: linear-gradient(180deg, rgba(13,11,8,0.9) 0%, transparent 100%);
-    backdrop-filter: blur(2px);
+    background: rgba(13,11,8,0.97);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
     transition: all 0.5s ease;
   }
   nav.scrolled {
     padding: 16px 60px;
     background: rgba(13,11,8,0.97);
     border-bottom: 1px solid rgba(201,168,76,0.15);
+    top: 44px;
   }
   .nav-logo {
     font-family: 'Playfair Display', serif;
@@ -872,7 +874,7 @@
     white-space: nowrap;
   }
   .top-bar-cta:hover { background: var(--espresso); }
-  body { padding-top: 44px; }
+  body { padding-top: 88px; }
 
   /* EXIT POPUP */
   .popup-overlay {
