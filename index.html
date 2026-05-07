@@ -1412,23 +1412,44 @@
     <div class="section-tag reveal" style="color:var(--brown)">Lista exclusiva · Sé el primero</div>
     <h2 class="section-title reveal">Antes que suba<br><em>el precio.</em></h2>
     <p class="email-capture-sub reveal">Únete a la lista de clientes Don Colombia. Recibirás acceso anticipado a nuevos lotes, precios especiales y contenido exclusivo de la finca. Sin spam, solo café.</p>
-    <div class="reveal" style="max-width:480px;margin:0 auto 16px;">
-      <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
-      <style>
-        #sib-container { background-color: transparent !important; border: 1px solid rgba(201,168,76,0.2) !important; border-radius: 0 !important; }
-        #sib-form-container { background: transparent !important; }
-        .sib-form { background-color: transparent !important; padding: 0 !important; }
-        #sib-form .sib-form-block p { color: var(--espresso) !important; font-family: "Playfair Display", serif !important; font-size: 0 !important; }
-        .sib-form-block__button { background-color: var(--espresso) !important; color: var(--gold) !important; border-radius: 0 !important; font-family: "Montserrat", sans-serif !important; font-size: 0.65rem !important; letter-spacing: 0.2em !important; padding: 14px 24px !important; width: 100% !important; }
-        .input { border: 1px solid rgba(61,43,31,0.2) !important; border-radius: 0 !important; font-family: "Montserrat", sans-serif !important; font-size: 0.8rem !important; padding: 14px 16px !important; }
-        .entry__label { display: none !important; }
-        .entry__specification { display: none !important; }
-        .sib-form-block:first-child { display: none !important; }
-        .sib-form-block:nth-child(2) { display: none !important; }
-      </style>
+    <div class="reveal" style="max-width:480px;margin:0 auto 24px;">
       <form id="sib-form" method="POST" action="https://29a55f4a.sibforms.com/serve/MUIFALiu1PUZUoXS8jLK4dfc7JlG8Ah10ByjrrBtRNOzOtZDKytC7m3DmhObo5oVxuc1AAZOPu4oVhaLbfeh8DLLrL6es0Ey2HyHK7zzEPy2hy6OUDQc-pbaJnRqcVatkhM1vG3DgWjSEmN3Yh0E3_oP-dkhEwxmwTH_ZgJ80gVRfmLHA11WbAbYAOGm7mr-6hdRiZPWkbA3ajcNDg==" style="display:flex;gap:0;">
-        <input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="tu@email.com" required style="flex:1;border-right:none;" />
-        <button class="sib-form-block__button" type="submit" style="font-size:0.65rem;letter-spacing:0.2em;white-space:nowrap;">☕ Quiero acceso</button>
+        <input 
+          type="email" 
+          id="EMAIL" 
+          name="EMAIL" 
+          autocomplete="off" 
+          placeholder="tu@email.com" 
+          required 
+          style="
+            flex:1;
+            padding:16px 20px;
+            background:white;
+            border:2px solid #3D2B1F;
+            border-right:none;
+            font-family:'Montserrat',sans-serif;
+            font-size:0.85rem;
+            color:#1A1208;
+            outline:none;
+            -webkit-appearance:none;
+          " 
+        />
+        <button 
+          type="submit" 
+          style="
+            background:#1A1208;
+            color:#C9A84C;
+            padding:16px 24px;
+            border:2px solid #1A1208;
+            font-family:'Montserrat',sans-serif;
+            font-size:0.65rem;
+            font-weight:700;
+            letter-spacing:0.2em;
+            text-transform:uppercase;
+            cursor:pointer;
+            white-space:nowrap;
+          "
+        >☕ Quiero acceso</button>
         <input type="text" name="email_address_check" value="" style="display:none;">
         <input type="hidden" name="locale" value="es">
         <input type="hidden" name="html_type" value="simple">
